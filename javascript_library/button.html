@@ -1,0 +1,32 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<style type="text/css">
+button{
+    background-color: blue;
+    color: white;
+}
+.red{
+    background-color: red;
+}
+.green{
+    background-color: green;
+}
+</style>
+
+<button>Click Me!</button>
+<button>No, Click Me!!!</button>
+<button>Me Me Me!!!</button>
+
+<script type="text/javascript">
+
+$(document).on('click','button',function(){
+    $(this).toggleClass("red");
+});
+
+$("button").hover(function(){
+    $(this).addClass("green")
+}, function(){ $(this).removeClass("green") });
+
+
+</script>
+
+

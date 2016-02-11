@@ -1,0 +1,17 @@
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<p></p>
+
+<script type="text/javascript">
+    $.get("https://api.github.com/users/jreyles",displayName)
+
+    
+
+    function displayName(data){
+        $('p').append(data.name);    
+         console.log(data.name);
+    }
+
+</script>
+</html>

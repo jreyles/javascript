@@ -1,0 +1,53 @@
+<html>
+<head>
+  <title>http://localhost:1337/#/users</title>
+  <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js'></script>
+  <script type='text/javascript'>
+    var myApp = angular.module('myApp', []);
+    myApp.controller('usersController', function ($scope){
+      // we don't need a factory for this demo, it wouldn't make a difference if we did.
+        $scope.users = [
+            {firstname:'Brendan', lastname: 'Stanton', favLanguage: 'Javascript'},
+            {firstname:'Jonathan', lastname: 'Reyles', favLanguage: 'C'},
+            {firstname:'Noob', lastname: 'Ert', favLanguage: 'qBASIC'},
+            {firstname:'Yuki', lastname: 'Kimura', favLanguage: 'PHP'},
+            {firstname:'Jonathan', lastname: 'Goldsmith', favLanguage: 'Assembly'}
+        ];
+        $scope.addUser = function (){
+        // add to the array
+        $scope.users.push($scope.newUser); 
+        // clear the form values
+        $scope.newUser = {};
+        }
+        $scope.removeUser = function (user)
+        {
+          $scope.users.splice($scope.users.indexOf(user),1);
+        }
+
+    })
+  </script>
+</head>
+<body ng-app='myApp'>
+    <div ng-controller='usersController'>
+      <h3>Users Controller</h3>
+      Currently Typing {{newUser.firstname}} , {{newUser.lastname}} , {{newUser.favLanguage}}
+<form>
+    First Name: <input type='text' ng-model='newUser.firstname'>
+    Last Name: <input type='text' ng-model='newUser.lastname'>
+    Favorite Language: <input type='text' ng-model='newUser.favLanguage'>
+<input type='submit' value='Add User' ng-click='addUser()'>
+</form>
+        <li ng-repeat="user in users | filter:filter_name | orderBy:'lastname'">
+          {{ user.firstname }} - last name {{user.lastname}} -- favorite language {{user.favLanguage}}
+          <a href ng-click='removeUser(user)'>delete </a>
+          <!--<input type='submit' value='Delete User' ng-click='deleteUser(user)'> -->
+        </li>
+      Search users: <input type="text" ng-model="filter_name">
+      <ul>
+        <li ng-repeat="user in users | filter:filter_name | orderBy:'lastname'">
+          {{ user.firstname }} - last name {{user.lastname}} -- favorite language {{user.favLanguage}} 
+        </li>
+      </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<html>
+<head>
+  <title>Testing 123</title>
+  <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js'></script>
+  <script type='text/javascript'>
+    var myApp = angular.module('myApp', []);
+    myApp.controller('foodController', function ($scope){
+      // we don't need a factory for this demo, it wouldn't make a difference if we did.
+        $scope.food = [
+            {name:'Pizza', age: 25.9 },
+            {name:'BBQ', age: 30.8},
+            {name:'Fries', age: 28.1},
+            {name:'Salad', age: 15.5},
+            {name:'Steak', age: 28.5}
+        ];
+        $scope.addFood = function (){
+        // add to the array
+        $scope.food.push($scope.newFood); 
+        // clear the form values
+        $scope.newFood = {};
+        }
+
+    })
+  </script>
+</head>
+<body ng-app='myApp'>
+    <div ng-controller='foodController'>
+      <h3>Add a new food!</h3>
+      Currently Typing {{newFood.name}} , {{newFood.age}}
+<form>
+    Name: <input type='text' ng-model='newFood.name'>
+    Age: <input type='text' ng-model='newFood.age'>
+  <input type='submit' value='add new food' ng-click='addFood()'>
+</form>
+      Search food: <input type="text" ng-model="filter_name">
+      <ul>
+        <li ng-repeat="foods in food | filter:filter_name | orderBy:'name'">
+          {{ foods.name }} - age {{ foods.age | number:0 }}
+        </li>
+      </ul>
+    </div>
+</body>
+</html>

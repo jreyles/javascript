@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<link rel='stylesheet' href='/stylesheets/style.css' />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+<script type ="text/javascript">
+
+$(document).ready(function (){
+// write socket stuff above line
+    var socket = io.connect();
+// we'll write all the socket stuff after the above line!
+    $('#reset').click(function() {
+        socket.emit("reset");
+        })
+$('#default').click(function (){
+    socket.emit("button_clicked", {reason: "because I want to learn about sockets!"});
+});
+socket.on('update', function(data) {
+    console.log('The server says: ' + data);
+    $("#count").html(data);
+    });
+
+})
+</script>
+<head>
+    <body>
+        This has been counted <h4 id="count"></h4> times.
+<button id="reset"> reset </button>
+<button id="default">I AM A BUTTON!</button>
+
+<!-- web page goes here -->
+</body>
+
+</html>
+                                     

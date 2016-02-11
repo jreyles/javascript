@@ -1,0 +1,62 @@
+<html ng-app="addthem_app"> <!-- Define the ng-app directive here-->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+           <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+                   </script>
+                   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+                   <!-- Optional theme -->
+                   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+                   <!-- Latest compiled and minified JavaScript -->
+                   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous">
+</script>
+<script>
+var addthem_app = angular.module('addthem_app',[]);
+addthem_app.factory('addthemFactory', function(){
+var factory = {};
+factory.index = function(callback){
+  $http.get('/new',).success(function(data){
+
+    callback(data)
+  })
+}
+factory.create = function(info, callback){
+  $http.post('/new/:name/').success(function(data){
+      callback(data);
+  })
+}
+
+return factory;
+}); // create factory
+
+from1955_app.controller('from1955Controller',function(){
+
+
+
+}); //create controller
+
+</script>
+<body>
+<h1> 1955 Dashboard </h1>
+<hr size=2>
+<p class="text-center">
+<a href="#"> Add people who were born in 1955!</a>
+<p class="text-center">
+<input type="text">
+<input type="submit">
+<p>
+
+<table class="table table-bordered">
+  <thead class="thead thead-inverse">
+    <td>Name</td>
+    <td>Action</td>
+  </thead>
+  <tbody>
+  <tr>
+    <td>Test 123</td>
+    <td><a class="btn btn-danger btn-delete-item">Delete</a></td>
+  </tr>
+</table>
+
+</body>
+</html>
