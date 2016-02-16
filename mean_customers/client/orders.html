@@ -1,6 +1,6 @@
-<html ng-app="friends_app">
+<html ng-app="order_app">
 <head>
-    <title>Full Mean Demo="support tag from-rainbow"></title>
+    <title>Add a New Order Demo="support tag from-rainbow"></title>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
 <!-- Latest compiled and minified CSS -->
    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -14,10 +14,43 @@
 </script>
 
 <script> 
+
 // Angular Code
+var order_app = angular.module('order_app',[]);
+// from the controller, take the scope and factory as the input
+order_app.controller('OrdersController', function($scope, OrderFactory){
+  OrderFactory.getOrders(function(data)
+  $scope.orders = data; // get the scope first, always. customers is from database
+});
+$scope.addorder = function() {
+  OrderFactory.addOrder($scope.new_order, function(){
+    $scope.orders = OrderFactory.getOrders();
+    $scope.new_order = {};
+  });
+  };
+  });
+
+
+order_app.factory('OrderFactory',function($http){
+  var factory = {};
+  var friends = [];
+  factory.getOrders = function(callback){
+    $http.get('/orders').success(function(output){
+      orders = output;
+      callback(orders);
+    });
+  };
+  factory.addOrder = function(info, callback){
+    $http.post('/addOrder',info).success(function(output){
+      orders.push({name: info.name, created_at: Date.now});
+    });
+  };
+  return factory;
+});
+
 </script>
 <body>
-<a href="#">Orders</a> | <a href="orders.html">Customers</a>
+<a href="#">Orders</a> | <a href="index.html">Customers</a>
 <h3> Add a new order</h3>
 <p> Customer: </p>
 <div class="dropdown">
