@@ -53,11 +53,33 @@ order_app.factory('OrderFactory',function($http){
 <a href="#">Orders</a> | <a href="index.html">Customers</a>
 <h3> Add a new order</h3>
 <p> Customer: </p>
-<select ng-model='new_order.name' ng-init='new_order.name=user_names[0]' ng-options='uname as uname for uname in user_names track by new_order.name'></select>
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    Customer
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <li><a href="#">Action</a></li>
+    <li><a href="#">Another action</a></li>
+    <li><a href="#">Something else here</a></li>
+    <li role="separator" class="divider"></li>
+    <li><a href="#">Separated link</a></li>
+  </ul>
 </div>
-<p> Order: </p>
-<input type='number' min='1' ng-model='new_order.qty' ng-init='new_order.qty=1'>
-    <select ng-model='new_order.product' ng-init='new_order.product=products[0]' ng-options='product as product for product in products'></select>
+</div>
+<p> Order 
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    Quantity
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <li><a href="#">Action</a></li>
+    <li><a href="#">Another action</a></li>
+    <li><a href="#">Something else here</a></li>
+
+  </ul>
+</div>
 
 <div class="dropdown">
   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -78,20 +100,15 @@ order_app.factory('OrderFactory',function($http){
 <p align="right"><input type="text"> 
 <table class="table table-bordered">
 	<thead class="active">
-  <tr>
 	<td>Customer Name</td>
-	<td>Product</td>
-  <td>Quantity</td>
 	<td>Created Date</td>
-</tr>
+	<td>Actions</td>
 	</thead>
 	<tbody>
-  <tr ng-repeat='order in orders | filter: filter_name track by $index'>
-		<td>{{order.name}}</td>
-		<td>{{order.product}}</td>
-		<td>{{order.qty}}</td>
-    <td>{{order.created_at | date: 'MMMM dd, yyyy'}}</td>
-	</tr>
+		<td>Michael Choi</td>
+		<td>Nike Shoes</td>
+		<td>2</td>
+		
 	</tbody>
 </table>
 

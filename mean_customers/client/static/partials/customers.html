@@ -25,17 +25,16 @@ customer_app.controller('CustomersController', function($scope, CustomerFactory)
 	});
 
 	$scope.addcustomer = function() {
-		$scope.new_customer.created_at = new Date();
-		CustomerFactory.addCustomer($scope.new_customer, function(data){
-			$scope.customers = data; //CustomerFactory.getCustomers();
-			$scope.new_customer = {}; // reset so it doesn't modify itself on text box
+		CustomerFactory.addCustomer($scope.new_customer, function(){
+			$scope.customers = CustomerFactory.getCustomers();
+			$scope.new_customer = {};
 		});
 		};
-	$scope.deletecustomer = function(customer){ 
-			CustomerFactory.deleteCustomer(customer, function(data){
-				$scope.customers = data;
-			})
-			};	
+	$scope.deleteCustomer = function(info, callback){
+		$scope.customers = data;
+		
+	}
+
   });
 
 customer_app.factory('CustomerFactory',function($http){
@@ -49,19 +48,17 @@ customer_app.factory('CustomerFactory',function($http){
 	};
 	factory.addCustomer = function(info, callback){
 		$http.post('/addCustomer',info).success(function(output){
-			customers = output;
-			callback(customers); // replace ordinary push with a callback funciton..
-			// operation will be done in the controller
-//			customers.push({name: info.name});
+			customers.push({name: info.name});
 		});
 	};
-	factory.deleteCustomer = function(customer,callback){
-		$http.post('/removeCustomer', customer).success(function(output){
-			customers = output;
-			callback(customers);
-//			customers.splice(customers.indexOf(output),1);
+	factory.deleteCustomer = function(info,callback){
+		$http.delete('/customers/:id').success(function(output){
+			customers.splice(customers.indexOf(output),1);
+
 		});
+		
 	}
+
 	return factory;
 	});
 </script>
